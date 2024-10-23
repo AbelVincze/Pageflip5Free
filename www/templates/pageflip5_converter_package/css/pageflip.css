@@ -1,0 +1,325 @@
+#pageflip {
+	width: 100%;
+	overflow: hidden;
+	/*visibility: hidden;*/
+	display: block;
+	/* use display:none only if needed! */
+}
+
+.pageflip-container {
+	padding-top: 1px;
+}
+.pf-book-container {
+	pointer-events: none;
+}
+.pf-book-content {
+	opacity: 0;
+	-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	-o-transition: opacity 1s;
+	-ms-transition: opacity 1s;	
+}
+.pf-book-offset {
+	-webkit-perspective: 5000px;
+	-moz-perspective: 5000px;
+	-ms-perspective: 5000px;
+	perspective: 5000px;
+	-webkit-perspective-origin-x: 50%;
+	-webkit-perspective-origin-y: 50%;
+	-moz-perspective-origin-x: 50%;
+	-moz-perspective-origin-y: 50%;
+	-ms-perspective-origin-x: 50%;
+	-ms-perspective-origin-y: 50%;
+	perspective-origin-x: 50%;
+	perspective-origin-y: 50%;
+	pointer-events: all;
+}
+
+
+.pf-page-container {
+	position: absolute;
+	overflow: hidden;
+	background-position: center center;
+	background-repeat: no-repeat
+}
+
+#pf-dropshadow {
+	-webkit-box-shadow: 0 10px 30px rgba(0,0,0,1);
+	-moz-box-shadow: 0 10px 30px rgba(0,0,0,1);
+	-o-box-shadow: 0 10px 30px rgba(0,0,0,1);
+	-ms-box-shadow: 0 10px 30px rgba(0,0,0,1);
+	box-shadow: 0 10px 30px rgba(0,0,0,1);
+}
+
+.pf-flip-shadowA {
+	background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1));
+	background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1));
+	background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1));
+	background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1));
+}
+.pf-flip-shadowB {
+	background-image: -o-linear-gradient(left, rgba(0,0,0,1), rgba(0,0,0,0), rgba(0,0,0,0));
+	background-image: -ms-linear-gradient(left, rgba(0,0,0,1), rgba(0,0,0,0), rgba(0,0,0,0));
+	background-image: -moz-linear-gradient(left, rgba(0,0,0,1), rgba(0,0,0,0), rgba(0,0,0,0));
+	background-image: -webkit-linear-gradient(left, rgba(0,0,0,1), rgba(0,0,0,0), rgba(0,0,0,0));
+}
+.pf-flip-topshadow {
+	background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.5), rgba(0,0,0,1), rgba(0,0,0,0));
+	background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.5), rgba(0,0,0,1), rgba(0,0,0,0));
+	background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.5), rgba(0,0,0,1), rgba(0,0,0,0));
+	background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.5), rgba(0,0,0,1), rgba(0,0,0,0));
+}
+.pf-emboss-left {
+	background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1));
+	background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1));
+	background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1));
+	background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1));
+	pointer-events: none;
+}
+.pf-emboss-right {
+	background-image: -o-linear-gradient(left, rgba(0,0,0,.5), rgba(0,0,0,0));
+	background-image: -ms-linear-gradient(left, rgba(0,0,0,.5), rgba(0,0,0,0));
+	background-image: -moz-linear-gradient(left, rgba(0,0,0,.5), rgba(0,0,0,0));
+	background-image: -webkit-linear-gradient(left, rgba(0,0,0,.5), rgba(0,0,0,0));
+	pointer-events: none;
+}
+
+
+/* Controls layout/animation/hover fx ----------------------------------- */
+
+#pageflip-controls {
+	position: absolute;
+	bottom: 0px;
+	padding: 8px 0 16px;
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+	opacity: 0;
+	-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	-o-transition: opacity 1s;
+	-ms-transition: opacity 1s;
+	color: #888;
+	font-size: 12px;
+}
+.pf-centered-buttons,
+.pf-left-buttons,
+.pf-right-buttons {
+	height: 26px;
+	overflow: visible;	
+}
+
+.pf-centered-buttons {
+	position: relative;
+	top: 0px;
+	left: auto;
+	right: auto;
+	margin: 0px auto;
+	width: 254px;
+}
+.pf-left-buttons {
+	float: left;
+	width: 104px;
+	margin-left: 32px;	
+}
+.pf-right-buttons {
+	float: right;
+	width: 104px;
+	margin-right: 32px;
+}
+
+.pf-control-bar-button {
+}
+
+.pf-control-bar-button,
+.pf-control-bar-pager {
+	float: left;
+	height: 26px;
+}
+.pf-right {
+	float: right;
+}
+.pf-control-bar-pager {
+/* 	padding-top: 2px; */
+	width: 150px;
+	text-align: center;
+}
+
+#pf-pagerin {
+	color: rgba(0,0,0,0.3);
+	border: none;
+	width: 140px;
+	height: 22px;
+    padding: 0px;
+	font-size: 14px;
+	/*font-family: Helvetica, Arial, sans-serif;*/
+    border-style: none; 
+    border-color: Transparent; 
+    overflow: auto;  
+    background: none;
+    text-align: center;
+}
+
+.pf-control-bar-button g,
+.pf-control-bar-pager g {
+	fill: rgba(0,0,0,0.3);
+	-webkit-transition: fill 0.2s;
+	-moz-transition: fill 0.2s;
+	-o-transition: fill 0.2s;
+	-ms-transition: fill 0.2s;	
+}
+.pf-disabled {
+	opacity: 0.2;
+}
+
+.pf-control-bar-button:not(.pf-disabled):hover g {
+	fill: #FA0;
+}
+/*.control-bar-button.disabled:hover g,
+.control-bar-pager.disabled:hover g  {
+	fill: #888;
+}*/
+#pageflip-controls {
+	color: rgba(0,0,0,0.3);	
+}
+
+/* Thumbnails layout/animation/hover fx ----------------------------------- */
+
+#pageflip-thumbnails {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	overflow: hidden;
+	
+	-webkit-transition: top 0.5s, opacity 0.5s;
+	-moz-transition: top 0.5s, opacity 0.5s;
+	-o-transition: top 0.5s, opacity 0.5s;
+	-ms-transition: top 0.5s, opacity 0.5s;
+
+}
+#pageflip-thumbnails.pf-hidden {
+	top: -100px;
+	opacity: 0;
+}
+#pf-thumbnail-container {
+	width: 10px;
+}
+.pf-thumbnail-spread {
+}
+.pf-thumbnail-page {
+}
+.pf-thumbnail-spread,
+.pf-thumbnail-page {
+	float: left;
+	margin: 0 16px 16px 0px;
+	/*margin: 0 8px 16px 8px;*/
+	background: #888;
+	-moz-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+	box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+	overflow: hidden;
+}
+.pf-thumbnail-button {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+}
+#pf-thleft {
+	left: 0px;
+}
+#pf-thright {
+	right: 0px;
+}
+#pf-thumbnail-container {
+	cursor: -webkit-grab;
+}
+#pf-thumbnail-container.grabbed {
+	cursor: -webkit-grabbing;
+}
+.pf-thumbnail-control {
+	position: absolute;
+	top: 0px;
+	width: 96px;
+	background: rgba( 0,0,0, 0.2 );
+	opacity: 1;
+	-webkit-transition: opacity 0.5s;
+	-moz-transition: opacity 0.5s;
+	-o-transition: opacity 0.5s;
+	-ms-transition: opacity 0.5s;
+}
+.pf-thumbnail-control.disabled {
+	pointer-events: none;
+	opacity: 0;
+}
+
+#pf-copyright-text {
+	display: none;
+	clear: both;
+	padding-top: 10px;
+}
+.pageflip-credits {
+	display: none;
+}
+
+/* Default Page setup */
+
+.pf-left-side {
+	background-color: #666;
+}
+
+.pf-right-side {
+	background-color: #666;
+}
+.pf-outer {
+	background: none;
+}
+
+
+.pf-hotspot {
+	position: absolute;
+	overflow: hidden;
+	cursor: pointer;
+}
+/*
+
+	Responsive design
+	
+*/
+
+
+@media screen and (max-width: 600px) {
+	.pf-control-bar-pager {
+		display: none;
+	}
+	.pf-control-bar-pager {
+		display: none;
+	}
+	.pf-centered-buttons {
+		width: 104px;
+	}
+
+
+}
+@media screen and (max-width: 440px) {
+	.pf-centered-buttons {
+		width: 160px;
+		float: left;
+		margin-left: 0;
+		overflow: hidden;
+	}
+	.pf-centered-buttons {
+		/*margin-left: 48px;*/
+	}
+	.pf-left-buttons {
+		display: none;	
+	}
+	.pf-control-bar-button {
+		width: 40px;
+	}
+	.pf-right-buttons {
+		width: 160px;
+		margin-right: 0px;
+	}
+
+}
+

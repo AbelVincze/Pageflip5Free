@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+		<title>PageFlip5 template - Empty Book</title>
+
+		<!-- start custom fonts -->
+		<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Fauna+One">
+		<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Syncopate:400,700">
+		<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu:400,700">
+		<!-- end custom fonts -->
+		
+		<!-- start needed css style files -->
+		<link type="text/css" rel="stylesheet" href="css/pageflip.css">	
+		<link type="text/css" rel="stylesheet" href="css/pageflip-custom.css">	
+		<!-- end needed css style files -->
+
+		<!-- start needed js libraries -->
+		<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>	
+		<script type="text/javascript" src="js/pageflip5-min.js"></script>
+		<script type="text/javascript" src="js/key.js"></script>
+		<script type="text/javascript" src="js/pageflip5-multibook-loader.js"></script>
+		<!-- end needed js libraries -->
+		
+		<style>
+		
+			body {
+				margin: 0px;
+				width: 100%;
+				height: 100%;
+				background: #ececec;
+			
+				font-family: "Fauna One", "Lucida Grande", Helvetica, sans-serif;
+				font-size: 13px;
+			}
+			#bookselector {
+				text-align: center;
+			}
+			#bookselector ul li {
+				cursor: pointer;
+				list-style: none;
+				display: inline-block;
+				margin-right: 16px;
+			}
+			#pageflip {
+				-webkit-text-size-adjust: none;
+				-moz-text-size-adjust: none;
+				-ms-text-size-adjust: none;
+			}
+		
+		</style>
+		
+	</head>
+	<body>
+
+		<div id="bookselector">
+			<ul>
+				<li onClick="startPageflip('meetpageflip');">Meet Pageflip 5</li>
+				<li onClick="startPageflip('demo2');">Demo Book 2</li>
+				<li onClick="startPageflip('book');">Empty Book</li>
+			</ul>	
+		</div>
+
+		<!-- start embed pageflip -->
+		<div id="pageflip"></div>
+		<!-- end embed pageflip -->
+		<div class="pageflip-credits">Powered by <a href="http://pageflip-books.com" target="_blank">Pageflip 5</a></div>
+	</body>
+</html>

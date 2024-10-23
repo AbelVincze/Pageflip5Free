@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+		<title>Pageflip5 from PDF - ### BOOK NAME ###</title>
+		<!-- start needed js libraries -->
+		<link type="text/css" rel="stylesheet" href="css/pageflip.css">	
+		<link type="text/css" rel="stylesheet" href="### CUSTOM CSS LINK ###">	
+		<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>	
+		<script type="text/javascript" src="js/pageflip5-min.js"></script>
+		<!-- end needed js libraries -->
+	</head>
+	<body>
+		<!-- start embed pageflip -->
+		<div id="pageflip">
+			### EMBEDDED CONTENT ###
+			### EMBEDDED CONTROLBAR ###
+		</div>
+		<!-- start script needed to run pageflip -->
+		<script type="text/javascript">
+			var $pageflip = $('#pageflip');
+			$pageflip.pageflipInit( {
+				### EMBEDDED CONFIG OPTIONS ###
+			}, "### BOOK ID ###" );
+			var API = $pageflip.pageflip();
+			function p( n ) { API.gotoPageLabel( "t"+n, true ); }
+			function u( url ) { window.open( url ); }
+		</script>
+		<!-- end script needed to run pageflip -->
+		<!-- end embed pageflip -->
+		<div class="pageflip-credits">Powered by <a href="http://pageflip-books.com" target="_blank">Pageflip 5</a></div>
+	</body>
+</html>

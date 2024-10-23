@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="450px" height="600px" viewBox="0 0 450 600" xml:space="preserve">
+<rect fill="#EC9600" width="450" height="600"/>
+<g style="opacity: 0.2;">
+	<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="100" y1="0" x2="100" y2="4"/>
+	
+		<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="8.3636,8.3636" x1="100" y1="12.364" x2="100" y2="91.818"/>
+	<polyline fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" points="100,96 100,100 96,100 	"/>
+	
+		<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="8.3636,8.3636" x1="87.636" y1="100" x2="8.182" y2="100"/>
+	<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="4" y1="100" x2="0" y2="100"/>
+</g>
+<g style="opacity: 0.2;">
+	<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="0.001" y1="500" x2="4.001" y2="500"/>
+	
+		<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="8.3636,8.3636" x1="12.365" y1="500" x2="91.819" y2="500"/>
+	<polyline fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" points="96.001,500 100.001,500 100.001,504 	"/>
+	
+		<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="8.3636,8.3636" x1="100.001" y1="512.363" x2="100.001" y2="591.818"/>
+	<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="100.001" y1="596" x2="100.001" y2="600"/>
+</g>
+</svg>

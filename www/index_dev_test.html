@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+		<title>PageFlip5 dev</title>
+		<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Fauna+One">
+		<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu:400,700">
+		<!-- start needed js libraries -->
+		<link type="text/css" rel="stylesheet" href="css/pageflip.css">	
+		<link type="text/css" rel="stylesheet" href="css/pageflip-custom.css">
+		<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>	
+		<script type="text/javascript" src="js/pageflip5.js"></script>
+		<!-- end needed js libraries -->
+		<style>
+			body {
+				width: 100%;
+				height: 100%;
+				background: #800;
+			}
+			
+			#page_orig {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 700px;
+				height: 550px;
+				transform: translate3d( -50%, -50%, 0 );
+				
+				transition: transform 0.35s;
+			}
+			#page_orig:hover {
+				transform: translate3d( -50%, -50%, 0 ) scale( 2 );
+			}
+			#pagecontent_orig {
+				width: 100%;
+				height: 100%;
+				background: url( testimages/testpage.jpg ) no-repeat left top;
+				background-size: 700px 550px;
+			}
+			
+			#page_zoom {
+				pointer-events: none;
+				position: absolute;
+				opacity: 0;
+				top: 50%;
+				left: 50%;
+				width: 1400px;
+				height: 1100px;				
+				transform: translate3d( -50%, -50%, 0 ) scale( 0.5 );
+				
+				transition: transform 0.35s, opacity 0.35s;
+			}
+			#page_orig:hover + #page_zoom {
+				opacity: 1;
+				transform: translate3d( -50%, -50%, 0 ) scale( 1 );
+			}
+			#pagecontent_zoom {
+				width: 100%;
+				height: 100%;
+				background: url( testimages/testpage_zoom.jpg ) no-repeat left top;
+				background-size: 1400px 1100px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- start embed pageflip -->
+		<div id="page_orig"><div id="pagecontent_orig"></div></div>
+		<div id="page_zoom"><div id="pagecontent_zoom"></div></div>
+		<script type="text/javascript">
+			console.log( "lang=en;screen_dpi=72;screen_resolution=2560x1600;os_name=Mac OS 10.11.6;os_version=MAC 28,0,0,137;");
+			console.log( navigator );
+			console.log( encodeURIComponent("lang="+navigator.language+";screen_dpi=72;screen_resolution="+screen.width+"x"+screen.height+";os_name="+navigator.platform+";os_version="+navigator.platform).split("%2F").join("/") );
+		</script>
+	</body>
+</html>

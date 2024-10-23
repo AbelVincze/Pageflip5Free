@@ -1,0 +1,5 @@
+- Supports latest Pageflip5 v1.7 engine's CSS changes
+- Use CropBox if available when convering PDF
+- Better session handling to prevent loss of session data after 5 mins of idle time
+- Fixed Youtube style case sensitive URLs in PDF links
+- Use PDO object to access MySQL database

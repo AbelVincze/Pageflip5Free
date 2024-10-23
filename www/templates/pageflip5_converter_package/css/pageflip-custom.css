@@ -1,0 +1,16 @@
+#pageflip {
+	width: 100%;
+	background: #ececec;
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+}
+
+.pageflip-container {
+}
+#pf-pagerin {
+	font-family: "Fauna One", "Lucida Grande", Helvetica, sans-serif;
+}
+#pf-stage {
+	background: #ececec;
+}

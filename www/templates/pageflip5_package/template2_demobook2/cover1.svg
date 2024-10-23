@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1000px"
+	 height="2000px" viewBox="0 0 1000 2000" style="enable-background:new 0 0 1000 2000;" xml:space="preserve">
+<g id="Layer_1_1_">
+	<rect style="fill:#00C1FD;" width="998.753" height="2000"/>
+	<g style="opacity:0.6;">
+		
+			<radialGradient id="SVGID_1_" cx="-1142.374" cy="1000.001" r="1938.6208" gradientTransform="matrix(0.4994 0 0 0.5144 574.4695 485.6428)" gradientUnits="userSpaceOnUse">
+			<stop  offset="0.2445" style="stop-color:#FFFFFF;stop-opacity:0"/>
+			<stop  offset="0.903" style="stop-color:#FFFFFF"/>
+		</radialGradient>
+		<rect y="1.248" style="fill:url(#SVGID_1_);" width="998.753" height="1997.505"/>
+		
+			<radialGradient id="SVGID_2_" cx="6.877" cy="960.6445" r="796.9199" gradientTransform="matrix(0.9409 -0.3351 0.3351 0.9409 -326.212 109.3979)" gradientUnits="userSpaceOnUse">
+			<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0"/>
+			<stop  offset="1" style="stop-color:#FFFFFF"/>
+		</radialGradient>
+		<path style="fill:url(#SVGID_2_);" d="M955.267,704.255l0.998,3.904l1.354,3.801l-0.354,0.107l22.739,88.952L0,1000
+			l924.11-382.126l30.804,86.491L955.267,704.255z M0,1000 M0,1000 M0,1000 M0,1000 M287.933,1957.265l0.106,0.354l3.8-1.354
+			l3.904-0.998l-0.109-0.353l86.491-30.804L0,1000l198.981,980.004L287.933,1957.265z M632.344,1774.209l0.234,0.287l2.992-2.703
+			l3.227-2.417l-0.236-0.286l68.119-61.557L0,1000l558.864,829.258L632.344,1774.209z M880.487,1473.289l0.326,0.176l1.729-3.646
+			l2.055-3.465l-0.327-0.173l39.378-82.94L0,1000l833.668,552.268L880.487,1473.289z M994.584,1100.313l0.368,0.037l0.203-4.022
+			l0.572-3.996l-0.368-0.033l4.641-91.696L0,1000l981.552,191.197L994.584,1100.313z M774.21,367.655l0.286-0.234l-2.703-2.991
+			l-2.417-3.229l-0.286,0.237l-61.556-68.12L0,1000l829.258-558.865L774.21,367.655z M473.288,119.513l0.176-0.326l-3.646-1.729
+			l-3.464-2.056l-0.174,0.328l-82.94-39.377L0,1000l552.267-833.668L473.288,119.513z M100.312,5.417l0.038-0.369l-4.026-0.204
+			l-3.991-0.572L92.299,4.64L0.604,0L0,1000L191.196,18.448L100.312,5.417z M0,1000 M0,1000 M0,1000 M0,1000"/>
+	</g>
+</g>
+<g id="Layer_1">
+</g>
+</svg>

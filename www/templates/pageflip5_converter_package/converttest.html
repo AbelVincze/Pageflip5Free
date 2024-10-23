@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!--
+	Pageflip PDF converter API sample file
+	Created by Abel Vincze - 2018.03.08
+	Copyright Iparigrafika Ltd.
+	
+	
+	This sample file serves as an Example how to use PDF converter API.
+	All the possible settings are listed below, in 3 categories:
+	- Import Options, Optional, if missing, default values are used for conversion.
+		object: importoptions{}
+		role: These settings defines the way how the PDF is used:
+			- spread:	Auto:	If the PDF contains spreads (double pages), the converter splits them automatically
+						Off:	If the PDF contains spreads (double pages), the converter scales them to a single page (by the way defined in scale)
+						Horizontal, Vertical:	The converter splits all pages in the selected orientation
+			- rotation:	Auto:	If the PDF contains rotated pages, the converter rotates them
+						Off:	If the PDF contains rotated pages, the converter scales them to a single page (by the way defined in scale)
+						All:	The converter rotates all pages by 90 degree
+			- scale: (have effect only if the PDF contains pages with different sizes)
+						Fit:	Fit the PDF page on the book's page
+						Fill:	The book's page is filled with the PDF page, keeping the original aspect ratio
+						Noscale: The PDF page is copied to the book's page without scaling
+	- Config Options, Optional, if missing, default values are used for conversion.
+		object: configoptions{}
+		role: These are the Pageflip book's configuration options
+	- POST variables, Required
+		role: sending Data to the PDF converter php script.
+			- file:				the path to the PDF fileto convert on the server, path can be relative to the converter script
+			- url:				the URL to the PDF to convert
+			(one of the aboves are required!)
+			
+			- output:			Required, the output folder where the converted book's folder will be copied. (can be the same for all book)
+			- log:				enable logging, to the book's folder's log folder
+			- importoptions:	The Import Options object
+			- configoptions:	The Configuration Options object
+			
+			- maxwidth:
+			- max height:		The maximum page size, the PDF's page will be resized to fit in.
+			- thumbheight:		The height of the thumbnail images
+			
+			- quality:			Supersampling: 1 = no SS, 2 = 2^2 SS, 3 = 3^2 SS, and so on. The conversion dpi is multiplied by this value. Higher the value is, more memory is needed
+			- jpgquality:		JPG compression, 1-100 (1 = worst, 100 = best)
+			- embedded:			Embed html content in the generated index.html. set to true for offline browser compatibility
+			- bookid:			The id of the book is used as class name for the book's subparts, handy for CSS styling
+			- bookname:			The name of the book, used as title for index.html page
+			
+-->
+<html>
+	<head>
+		<title>Pageflip5 - PDF to Pageflip Converter 2 API usage sample</title>
+		<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>	
+		<script>
+			
+				// Import options for PDF processing, the values below are all default values, used when property is not set!
+			var importoptions = { 	
+					spreads:	"Auto",		// default "Auto",	options "Auto", "Off", "Horizontal", "Vertical" (Case sensitive!)
+					rotation:	"Auto",		// default "Auto",	options "Auto", "Off", "All"
+					scale:		"Fit"		// default "Fit",	options "Fit", "Fill", "Noscale"
+				},
+				// Config options of the book generated, the values below are all default values, used when property is not set!
+				configoptions = {	
+					dropshadow:				true,
+					dropshadowopacity:		0.25,		// 0-1;
+					
+					pageshadow:				true,
+					pageshadowopacity:		0.25,		// 0-1;
+					
+					backgroundcolor:		"#444",
+					backgroundenabled:		true,
+					pagebackgroundcolor:	"#888",
+					controlscolor:			"rgba(255,255,255,0.5)",
+					controlshoveredcolor:	"#FA0",
+					controlbarbackcolor:	"rgba(68,68,68,0.35)",
+					controlbarbackenabled:	true,
+					
+					RTL:					false,		// Right to Left flipping mode
+					vertical:				false,		// Vertical mode
+					singlepagemode:			false,		// Single Page mode 
+					
+					hardcover:				true,		// Hard covered book
+					hardpages:				false,		// Hard inside pages
+					centersinglepage:		true,		// Center book if only a single page is visible (front and back covers)
+					roundedcorners:			false,		// Rounded corners
+					alwaysopened:			false,		// Book can't be closed
+					
+					controlbar:				true,		// Control bar enabled
+					controlbartop:			true,		// Control bar over the book
+					mousecontrol:			true,		// Control with mouse
+					controlbarbtn:			true,		// Navigation using control bar buttons
+					pagerenabled:			true,		// Pange number display
+					hotkeys:				true,		// Navigation using keyboard
+					thumbenabled:			true,		// Thumbnails enabled
+					thumbautohide:			true,		// Auto hide Thumbnails
+					thumbtop:				true,		// Thumbnails over the book
+					fullscreenenabled:		true,		// Enable Fullscreen view
+					autoflipenabled:		true,		// Auto flipping enabled
+					startautoflip:			false,		// Start autoflipping book at start
+					
+					shareprinterest:		true,		// Pinterest button enabled
+					sharefacebook:			true,		// Facebook button enabled
+					sharetwitter:			true,		// Twitter button enabled
+					sharegoogle:			true,		// Google+ button enabled
+					sharemsg:				"PDF to flipbook converter http://pageflip-books.com",		// Share message less then 160 characters
+					sharevia:				"@MaccPageFlip",
+					sharepageimage:			1,			// page number which' image is to be used
+					
+					showcopyright:			false,		// Show copyright message
+					
+					keyfile:				"", 		// Link to a key.js file, OR set the properties below
+					copyright:				"test",		// Copyright text used in the Key Generator
+					//escape(copyright)
+					key:					"L56gICDG6QWvbfRFHc",			// Key generated by the Key Generator
+					
+					datafolder:				"pageflipdata/"		// Used ONLY if embedded = false, always ends with "/"
+				},
+				jobid;
+
+			$(document).ready( function() {
+				convertPDF();
+			} );
+			
+			function convertPDF() {
+				$.ajax({	type:	"POST",
+							url:	"convertpdf.php",
+							
+							// THESE ARE THE POST VARIABLES
+							data: { //file:			"uploads/wrongspread.pdf",		// Required file OR url
+								//	url:			"http://domain.com/pdffile.pdf",// URL of the PDF file to convert
+									url:			"http://cache.lego.com/bigdownloads/buildinginstructions/6115703.pdf",
+									output:			"testdir",						// Optional, default "output"
+									log:			true,							// Optional, default false
+									
+									importoptions:	importoptions,					// Optional, PDF Import options
+									configoptions:	configoptions,					// Optional, Pageflip Config options
+									
+									maxwidth:		600,							// Optional, default 600
+									maxheight:		600,							// Optional, default 600
+									thumbheight:	100,							// Optional, default 100
+									
+									threads:		4,								// Number of used CPU threads
+									
+									quality:		4,								// Optional, default 1, values 1,2,3,4
+									jpgquality:		90,								// Optional, default 90, values 1-100
+
+									embedded:		true,							// Optional, default true (offline compatible)
+									bookid:			"mypageflip",					// Optional
+									bookname:		"My Pageflip",					// Optional
+								  }
+						}).done( function( result ) {
+							var resp = result.split( "," );
+							if( resp[0]==="0" ) {
+								
+								jobid = Number( resp[1] );
+								
+								console.log( "jobID (for progress check): "+resp[1] );
+								console.log( "converted pageflip dir: "+resp[2] );
+								checkConvertProgress();
+							} else {
+								console.log( "convert error "+resp[1] );
+							}
+						}
+				);
+			}
+			function checkConvertProgress() {
+				$.ajax({	type:	"POST",
+							url:	"convertpdf_progress.php",
+							data: { jobid: jobid }
+						}).done( function( result ) {
+							var resp = result.split( "," );
+							if( resp[0]==="0" ) {
+								var progress = Number( resp[1] );
+								checkConvertProgressCallback( progress );
+							} else {
+								console.log( "progress check error "+resp[1] );
+							}
+						}
+				);
+			}
+			function checkConvertProgressCallback( progress ) {
+				console.log( "progress "+progress+"%" );
+				if( progress==100 ) {
+					console.log( "finished converting" );
+				} else {
+					setTimeout( checkConvertProgress, 1000 );
+				}
+			}
+			
+		</script>
+	</head>
+	<body>
+		<p>See console for details</p>
+	</body>
+</html>
