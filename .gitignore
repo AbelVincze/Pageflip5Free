@@ -1,1 +1,8 @@
 .DS_Store
+uploads/
+temp/
+settings.php
+phpinfo.php
+convertpdf.php
+convertpdf_progress.php
+converttest.php
