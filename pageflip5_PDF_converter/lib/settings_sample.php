@@ -10,6 +10,9 @@
 	define("__USERNAME__",			"username" ); 
 	define("__PASSWORD__",			"password" ); 
 	define("__DATABASE__",			"database" ); 
+
+	// The path to your local php binary
+	define("__PHPPATH__", "/usr/bin/php");
 	
 	// Default Copyright text used for generated books 
 	// (can be overwritten in Export Settings while using PDF converter)
@@ -20,6 +23,6 @@
 
 	// CPU Threads used simultaneously for conversion
 	// (for maximum performance do not exceed the number of available CPU threads) 
-	define("__THREADS__",			8 ); 
+	define("__THREADS__",			4 ); 
 
 ?>
