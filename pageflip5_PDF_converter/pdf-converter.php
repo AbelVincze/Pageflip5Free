@@ -361,7 +361,7 @@
 									<div class="smallblock advancedexport">
 										<label for="copyright" class="label inputlabel">Copyright text:</label>
 										<div class="buttons">
-											<textarea name="copyright" type="text" id="copyright" class="longin" disabled="disabled">©2024 pageflip-books.com</textarea><br>
+											<textarea name="copyright" type="text" id="copyright" class="longin">©2024 pageflip-books.com</textarea><br>
 											<input name="copyrightdisplay" type="checkbox" id="copyrightdisplay" value="Enabled">Display copyright text
 										</div>
 									</div>
