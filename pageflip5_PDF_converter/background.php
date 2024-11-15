@@ -62,7 +62,6 @@
 						Tracer::trace( "Target size: " . $RJData["Width"] . "x" . $RJData["Height"] . " / " );
 						Tracer::trace( "Render DPI: $renderDPI\n" );
 						Tracer::trace( "JPG quality: $jpgquality\n" );
-						Tracer::trace( "Trial: $trial\n" );
 						Tracer::trace_date( "Start time: " );
 	
 	$TW = $RJData["Width"];
@@ -99,7 +98,7 @@
 		
 		try { $img->readImage("{$pdfFile}[$page]"); }
 		catch( Exception $e ) {
-						Tracer::trace( "imagick ERROR\n" );
+						Tracer::trace( "imagick ERROR: " . $e->getMessage() . "\n" );
 			// On error, add pages as Error page!
 			if( $RQp["spread"] ) file_put_contents ( $logFile , "Err"+$RQp["filea"]+",Err"+$RQp["fileb"]+",", FILE_APPEND );
 			else file_put_contents ( $logFile , "Err"+$RQp["filea"]+",", FILE_APPEND );
