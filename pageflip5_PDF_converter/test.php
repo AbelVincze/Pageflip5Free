@@ -11,7 +11,9 @@
 		Released 24.10.28
 
 	*/
-
+	error_reporting(1);
+	ini_set("display_errors", 0);
+	
 	require_once( 'lib/settings.php' );	
 
 	// Testing 
@@ -32,26 +34,36 @@
 	
 	echo( "ImageMagick test:<br>" );
 	
-	exec("convert -version", $out, $rcode); //Try to get ImageMagick "convert" program version number.
+	exec("magick -version", $out, $rcode); //Try to get ImageMagick "convert" program version number.
 	
-	if( $rcode==0 ) {
-		try {
-			$img = new imagick();
-			echo( "imagick installed.<br>" );
-		}
-		catch( Exception $e ) {
-			echo( "imagick ERROR<br>" );
-		}
-		try {
-			$ver = imagick::getVersion();
-			echo( "imagick version: ".$ver["versionString"]."<br>" );
-			echo( "(needed version 6.7 or newer)<br><br>" );
-		}
-		catch( Exception $e ) {
-			echo( "imagick version ERROR<br><br>" );
+	if ($rcode==0) {
+		echo("convert -version output:<br><pre>");
+		print_r(implode("\n", $out));
+		echo("</pre><br>");
+
+		if(class_exists('Imagick')) {
+			echo "Imagick class is available.<br>";
+
+			try {
+				$img = new imagick();
+				echo( "imagick installed.<br>" );
+			}
+			catch( Exception $e ) {
+				echo( "imagick ERROR<br>" );
+			}
+			try {
+				$ver = imagick::getVersion();
+				echo( "imagick version: ".$ver["versionString"]."<br>" );
+				echo( "(needed version 6.7 or newer)<br><br>" );
+			}
+			catch( Exception $e ) {
+				echo( "imagick version ERROR<br><br>" );
+			}
+		} else {
+			echo( "ImageMagick Class not found, imagick.so extension is not installed<br><br>" );	
 		}
 	} else {
-			echo( "ImageMagick not found<br><br>" );
+		echo( "ImageMagick not found<br><br>" );
 	}
 	
 	echo( "Database test:<br>" );

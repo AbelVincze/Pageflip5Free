@@ -13,11 +13,16 @@
 		2015.10.03
 		- fixed crop (white line on the spread's right)
 	*/
-	error_reporting(0);
+	error_reporting(1);
 	ini_set("display_errors", 0);
 
 	require_once( 'lib/Tracer.php' );
 	require_once( 'lib/DBConnection.php' );	
+
+	if(!class_exists('Imagick')) {
+		error_log("PDF Converter -> background.php -> Error: Imagick Class doesn't exists");
+		exit(1);
+	}
 
 	$pdfFile		= $argv[1];
 	if( !$pdfFile ) exit();			// Exit if called without args...

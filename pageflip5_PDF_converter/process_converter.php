@@ -11,7 +11,7 @@
 		Released 24.10.28
 
 	*/
-	error_reporting(0);
+	error_reporting(1);
 	ini_set("display_errors", 0);
 	
 	session_start();
@@ -59,18 +59,25 @@
 			
 			if( $PDFp->parsePDF( $output_dir."source.pdf" ) === false ) {
 				errorExit( "Parsing PDF failed" );
-			}	
-			$_SESSION["pdfData"] = $PDFp->getPDFData();
+			}
 			$pdfInfo = $PDFp->getInfo();
 			$pdfSize = $PDFp->getRectSize( $pdfInfo["mediabox"] );
-			$pdfSize["width"] = floor( $pdfSize["width"]/2 )*2;
-			$pdfSize["height"] = floor( $pdfSize["height"]/2 )*2;
-			$_SESSION["basew"] = $baseW = $pdfSize["width"];
-			$_SESSION["baseh"] = $baseH = $pdfSize["height"];
-			$crop = 0;
-			$targetResolution = getRenderResolution( $pdfSize, 146, 146, $crop ); 
-			$previewwidth = $targetResolution["width"];
-			$previewheight = $targetResolution["height"];
+			if( $pdfSize["width"]==0 || $pdfSize["height"]==0 ) {
+				errorExit( "Document page size error: ".$pdfSize["width"]." x ".$pdfSize["height"]." pixels");
+			}	
+			try {	
+				$_SESSION["pdfData"] = $PDFp->getPDFData();
+				$pdfSize["width"] = floor( $pdfSize["width"]/2 )*2;
+				$pdfSize["height"] = floor( $pdfSize["height"]/2 )*2;
+				$_SESSION["basew"] = $baseW = $pdfSize["width"];
+				$_SESSION["baseh"] = $baseH = $pdfSize["height"];
+				$crop = 0;
+				$targetResolution = getRenderResolution( $pdfSize, 146, 146, $crop ); 
+				$previewwidth = $targetResolution["width"];
+				$previewheight = $targetResolution["height"];
+			} catch (Exception $e) {
+				errorExit( "Processing PDF parser output failed: ".$e->getMessage());
+			}
 			echo( 	"0,".
 					$file.",".								// A feltoltott file neve
 					$filesize.",".							// Merete Byte-ban
@@ -194,6 +201,7 @@
 				$command =	__PHPPATH__." -f background.php ".
 							$output_dir."source.pdf $jobID $i $threads ".$output_dir."renderqueue $retina $crop $supersample $preview 0 90";
 				exec( "$command > /dev/null &", $arrOutput );
+
 			}
 			
 			echo( "0,$jobID,$previewwidth,$previewheight" );

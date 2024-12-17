@@ -14,7 +14,7 @@
 		This script returns the progress of a render job.	
 		
 	*/
-	error_reporting(0);
+	error_reporting(1);
 	ini_set("display_errors", 0);
 	
 	require_once( 'lib/DBConnection.php' );	

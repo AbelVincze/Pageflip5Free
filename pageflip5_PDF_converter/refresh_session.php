@@ -11,6 +11,9 @@
 		Released 24.10.28
 
 	*/
+	error_reporting(1);
+	ini_set("display_errors", 0);
+	
 	session_start();
 	
 	if ( isset($_SESSION["initialized"]) ) {
