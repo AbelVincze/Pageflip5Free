@@ -24,15 +24,88 @@
 	$max_input_vars =			ini_get("max_input_vars");
 
 	echo ( "Checking environment for running PDF to Pageflip5 converter and API<br><br>" );
-	echo ( "php.ini settings (needed):<br>" );
+	echo ( "<strong>php.ini settings (needed):</strong><br>" );
 	
 	echo ( "upload_max_filesize =	$upload_max_filesize (128M only for converter)<br>" );
 	echo ( "post_max_size =			$post_max_size (128M only for converter)<br>" );
 	echo ( "max_execution_time =	$max_execution_time (0)<br>" );
 	echo ( "max_input_time =		$max_input_time (1000)<br>" );
 	echo ( "max_input_vars =		$max_input_vars (300000 only for converter)<br><br>" );
+
+/* ============================================================
+   PHP PATH TEST
+   ============================================================ */
+	echo("<strong>PHP binary test:</strong><br>");
+
+	$detectedPhp = null;
+	$fallbackCandidates = [
+		PHP_BINARY,
+		PHP_BINDIR . DIRECTORY_SEPARATOR . 'php',
+		'/opt/homebrew/bin/php',   // macOS Apple Silicon default
+		'/usr/local/bin/php',      // macOS Intel or Linux Homebrew
+		'/usr/bin/php',            // typical Linux
+		'/bin/php',                // fallback
+	];
+
+	// 1) Start with the configured constant if available
+	if (defined('__PHPPATH__')) {
+		$phpPath = __PHPPATH__;
+		echo("Configured __PHPPATH__: <code>$phpPath</code><br>");
+	} else {
+		$phpPath = null;
+		echo("⚠️ __PHPPATH__ not defined in settings.php<br>");
+	}
+
+	// 2) Check if the configured path exists and works
+	$validPhpPath = null;
+	if ($phpPath && file_exists($phpPath) && is_executable($phpPath)) {
+		$validPhpPath = $phpPath;
+		echo("✅ Found PHP executable at <code>$phpPath</code><br>");
+	} else {
+		echo("❌ Configured PHP path not valid or not executable.<br>");
+		echo("Searching for fallback candidates...<br>");
+	}
+
+	// 3) Try fallback candidates if needed
+	if (!$validPhpPath) {
+		foreach ($fallbackCandidates as $candidate) {
+			if (!$candidate || !file_exists($candidate)) continue;
+			if (is_executable($candidate)) {
+					$validPhpPath = $candidate;
+					echo("✅ Found working fallback: <code>$validPhpPath</code><br>");
+					break;
+			}
+		}
+
+		if (!$validPhpPath) {
+			$which = @trim(shell_exec('command -v php 2>/dev/null'));
+			if ($which) {
+					$validPhpPath = $which;
+					echo("✅ Found PHP using PATH: <code>$validPhpPath</code><br>");
+			}
+		}
+	}
+
+	// 4) Final result
+	if ($validPhpPath) {
+		echo("Set PHP binary in settings.php to: <code>$validPhpPath</code><br>");
+		$out = [];
+		$rcode = 0;
+		exec(escapeshellarg($validPhpPath) . ' -v 2>&1', $out, $rcode);
+		if ($rcode === 0) {
+			echo("Output of <code>php -v</code>:<br><pre>" . implode("\n", $out) . "</pre><br>");
+		} else {
+			echo("⚠️ PHP binary found but failed to execute (return code $rcode)<br>");
+		}
+	} else {
+		echo("❌ No working PHP binary found on this system.<br>");
+		echo("Please update <code>__PHPPATH__</code> in settings.php to a valid PHP CLI path.<br>");
+	}
+
+	echo("<br>");
+
 	
-	echo( "ImageMagick test:<br>" );
+	echo( "<strong>ImageMagick test</strong>:<br>" );
 	
 	exec("magick -version", $out, $rcode); //Try to get ImageMagick "convert" program version number.
 	
@@ -66,7 +139,7 @@
 		echo( "ImageMagick not found<br><br>" );
 	}
 	
-	echo( "Database test:<br>" );
+	echo( "<strong>Database test:</strong><br>" );
 
 	try {
 		$conn = new PDO ( "mysql:host=".__SERVER__.";dbname=".__DATABASE__, __USERNAME__, __PASSWORD__ );
